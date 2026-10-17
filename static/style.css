@@ -1,0 +1,110 @@
+/* Base page styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f6fb;
+    color: #1f2937;
+    margin: 0; 
+    padding: 40px 20px;
+}
+
+
+/* Page header */
+header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+header h1 {
+    color: #1d4ed8;
+    font-size: 32px; 
+    margin-bottom: 10px;
+}
+
+header p { 
+    color: #64748b;
+    font-size: 16px;
+}
+
+/* Main content area */
+main { 
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+
+/* Form card */
+section {
+    background-color: #ffffff;
+    padding: 30px; 
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08)
+}
+
+section h2 {
+    margin-top: 0;
+    color: #111827;
+}
+
+section > p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* Form Layout  */
+.form { 
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+label { 
+    font-weight: bold;
+}
+
+/* Text area */
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font: inherit;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: 2px solid #93c5fd;
+    border-color: #2563eb;
+}
+
+/* Submit button */
+button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Submitted Issue resule */
+section.h2:not(:first-child) {
+    margin-top: 28px;
+}
+
+section h2:not(:first-child) + p {
+    background-color: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 4px;
+    padding: 14px;
+    overflow-wrap: anywhere;
+
+}
