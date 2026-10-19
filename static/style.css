@@ -1,3 +1,8 @@
+/* Keep padding and borders inside element widths */
+* {
+    box-sizing: border-box;
+}
+
 /* Base page styling */
 body {
     font-family: Arial, sans-serif;
@@ -110,4 +115,20 @@ section h2:not(:first-child) + p {
     padding: 14px;
     overflow-wrap: anywhere;
 
+}
+
+/* Mobile Layout */
+@media (max-width: 600px) {
+    body {
+        padding: 24px 12px;
+    }
+
+    header h1 {
+        font-size: 26px;
+        overflow-wrap: anywhere;
+    }
+
+    section {
+        padding: 20px 16px;
+    }
 }
