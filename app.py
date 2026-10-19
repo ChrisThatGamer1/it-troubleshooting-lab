@@ -10,11 +10,15 @@ app = Flask(__name__) #creates web app
 @app.route("/", methods=["GET", "POST"])
 def home():
     issue = ""
+    error = ""
 
     if request.method == "POST":
-        issue = request.form.get("issue", "")
+        issue = request.form.get("issue", "").strip()
 
-    return render_template("index.html", issue=issue)
+        if not issue:
+            error = "Please describe your technical issue before submitting."
+
+    return render_template("index.html", issue=issue, error=error)
 
     
 

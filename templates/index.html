@@ -31,6 +31,10 @@
 
             <button type="submit">Troubleshoot Issue</button>
          </form>
+         {% if error %}
+            <p class="error-message" role="alert">{{ error }}</p>
+         {% endif %}
+
          {% if issue %}
             <h2>Your Submitted Issue</h2>
             <p>{{ issue }}</p>

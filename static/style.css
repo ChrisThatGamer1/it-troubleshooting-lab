@@ -60,7 +60,9 @@ section > p {
 }
 
 label { 
+    display: block;
     font-weight: bold;
+    margin-bottom: 8px;
 }
 
 /* Text area */
@@ -95,9 +97,10 @@ button:hover {
     background-color: #1d4ed8;
 }
 
-/* Submitted Issue resule */
-section.h2:not(:first-child) {
-    margin-top: 28px;
+/* Submitted Issue result */
+section h2:not(:first-child) {
+    margin-top: 20px;
+    margin-bottom: 16px;
 }
 
 section h2:not(:first-child) + p {
