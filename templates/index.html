@@ -11,7 +11,8 @@
  <body>
    <header>
       <h1>IT Troubleshooting Lab</h1>
-      <p>Your starting point for diagnosing technical issues.</p>
+      <h1>Let's Solve Your Technical Issue</h1>
+      <p>Identify the problem, gather the details, and work through troubleshooting steps.</p>
    </header>
 
    <main>
@@ -20,13 +21,32 @@
          <p>Tell us what's going wrong, and we'll help you investigate.</p>
 
          <form method="post">
-            <label for="issue">What problem are you experiencing?</label>
+            <label for="category">What type of issue are you experiencing?</label>
+            <select id="category" name="category" required>
+               <option value="">Select a category</option>
+               <option value="network">Network / Wi-Fi</option>
+               <option value="vpn">VPN</option>
+               <option value="api">API</option>
+               <option value="gaming">Gaming / Console</option>
+               <option value="account">Login / Account</option>
+               <option value="hardware">Hardware</option>
+               <option value="software">Application / Software</option>
+               <option value="other">Other</option>
+            </select>
 
+            <label for="issue_type">What specifically is going wrong?</label>
+            <select id="issue_type" name="issue_type" required disabled>
+               <option value="">Choose a category first</option>            
+            </select>
+            
+            
+            <label for="issue">Describe the problem</label>
             <textarea
                id="issue"
                name="issue"
                rows="5"
-               placeholder="Example: My computer connects to Wi-Fi, but I cannot access any websites."
+               placeholder="Describe what happened and any error message you received."
+               required
             ></textarea>
 
             <button type="submit">Troubleshoot Issue</button>
@@ -41,5 +61,8 @@
          {% endif %}
       </section>
    </main>
+
+   <script src="{{ url_for('static', filename='script.js') }}" defer></script> 
+   
  </body>
  </html>
