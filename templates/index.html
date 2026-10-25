@@ -1,68 +1,213 @@
 <!-- Index Page -->
- <!DOCTYPE html>
- <html lang="en">
- <head>
+<!doctype html>
+<html lang="en">
+  <head>
     <!-- Link to external CSS file -->
-     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+
+    <script id="troubleshooting-data" type="application/json">
+    {{ {
+        "issueTypes": issue_types,
+        "categoryNames": categories
+    } | tojson }}
+    </script>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>IT Troubleshooting Lab</title>
- </head>
- <body>
-   <header>
-      <h1>IT Troubleshooting Lab</h1>
-      <h1>Let's Solve Your Technical Issue</h1>
-      <p>Identify the problem, gather the details, and work through troubleshooting steps.</p>
-   </header>
+  </head>
 
-   <main>
-      <section>
-         <h2>Describe Your Issue</h2>
-         <p>Tell us what's going wrong, and we'll help you investigate.</p>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <a class="brand" href="{{ url_for('home') }}">
+          <span class="brand-icon" aria-hidden="true">✳</span>
+          <span>
+            <strong>IT Troubleshooting Lab</strong>
+            <small>Diagnose. Submit. Resolve.</small>
+          </span>
+        </a>
 
-         <form method="post">
-            <label for="category">What type of issue are you experiencing?</label>
-            <select id="category" name="category" required>
-               <option value="">Select a category</option>
-               <option value="network">Network / Wi-Fi</option>
-               <option value="vpn">VPN</option>
-               <option value="api">API</option>
-               <option value="gaming">Gaming / Console</option>
-               <option value="account">Login / Account</option>
-               <option value="hardware">Hardware</option>
-               <option value="software">Application / Software</option>
-               <option value="other">Other</option>
-            </select>
+        <span class="header-label">IT SUPPORT</span>
+      </header>
 
-            <label for="issue_type">What specifically is going wrong?</label>
-            <select id="issue_type" name="issue_type" required disabled>
-               <option value="">Choose a category first</option>            
-            </select>
-            
-            
+      <div class="progress">
+        <span class="progress-step active" data-progress="1">
+          <span>1</span> Category
+        </span>
+        <span class="progress-line"></span>
+        <span class="progress-step" data-progress="2">
+          <span>2</span> Issue
+        </span>
+        <span class="progress-line"></span>
+        <span class="progress-step" data-progress="3">
+          <span>3</span> Details
+        </span>
+      </div>
+
+      {% if error %}
+      <div class="alert" role="alert">{{ error }}</div>
+      {% endif %} {% if submitted %}
+      <section class="confirmation">
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <p class="eyebrow">SUBMISSION COMPLETE</p>
+        <h1>Your issue has been submitted.</h1>
+        <p>
+          Your information passed validation. The next step is to connect
+          submissions to persistent storage and a request history.
+        </p>
+
+        <div class="summary">
+          <p>
+            <strong>Category:</strong>
+            {{ categories[category] }}
+          </p>
+          <p>
+            <strong>Issue:</strong>
+            {{ issue_types[category][issue_type] }}
+          </p>
+          <p><strong>Description:</strong></p>
+          <p class="issue-description">{{ issue }}</p>
+        </div>
+
+        <a class="primary-button button-link" href="{{ url_for('home') }}">
+          Submit another issue
+        </a>
+      </section>
+
+      {% else %}
+
+      <section class="wizard">
+        <!-- STEP 1: CATEGORY -->
+        <div class="wizard-step" data-step="1">
+          <p class="eyebrow">STEP 1 OF 3</p>
+          <h1>What can we help you fix?</h1>
+          <p class="intro">
+            Start with the area that best matches the issue. We'll ask for the
+            details needed to investigate it.
+          </p>
+
+          <div class="category-grid">
+            <button type="button" class="category-card" data-category="device">
+              <span class="card-icon" aria-hidden="true">▣</span>
+              <strong>Device or software</strong>
+              <span>Apps, computers, peripherals</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </button>
+
+            <button type="button" class="category-card" data-category="network">
+              <span class="card-icon" aria-hidden="true">⌁</span>
+              <strong>Network</strong>
+              <span>Wi-Fi, VPN, connectivity</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </button>
+
+            <button type="button" class="category-card" data-category="account">
+              <span class="card-icon" aria-hidden="true">♙</span>
+              <strong>Account &amp; access</strong>
+              <span>Passwords, login, permissions</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </button>
+
+            <button type="button" class="category-card" data-category="email">
+              <span class="card-icon" aria-hidden="true">✉</span>
+              <strong>Email &amp; collaboration</strong>
+              <span>Mailbox, calendar, Teams</span>
+              <span class="card-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <p class="helper-text">Select a category to continue.</p>
+        </div>
+
+        <!-- STEP 2: ISSUE TYPE -->
+        <div class="wizard-step" data-step="2" hidden>
+          <p class="eyebrow">STEP 2 OF 3</p>
+          <h1>What's going wrong?</h1>
+          <p class="intro">
+            Choose the issue that most closely matches what you're experiencing.
+          </p>
+
+          <p class="selected-category">
+            Selected category:
+            <strong id="selected-category-label"></strong>
+          </p>
+
+          <div id="issue-type-options" class="issue-type-list"></div>
+
+          <div class="wizard-actions">
+            <button type="button" class="secondary-button" data-back="1">
+              ← Back
+            </button>
+          </div>
+        </div>
+
+        <!-- STEP 3: ISSUE DETAILS -->
+        <div class="wizard-step" data-step="3" hidden>
+          <p class="eyebrow">STEP 3 OF 3</p>
+          <h1>Tell us what happened.</h1>
+          <p class="intro">
+            Provide the details that will help investigate your technical issue.
+          </p>
+
+          <div class="selected-summary">
+            <span>Category</span>
+            <strong id="summary-category"></strong>
+            <span>Issue type</span>
+            <strong id="summary-issue-type"></strong>
+          </div>
+
+          <form method="post" id="issue-form">
+            <input
+              type="hidden"
+              name="category"
+              id="category-input"
+              value="{{ category }}"
+            />
+
+            <input
+              type="hidden"
+              name="issue_type"
+              id="issue-type-input"
+              value="{{ issue_type }}"
+            />
+
             <label for="issue">Describe the problem</label>
             <textarea
-               id="issue"
-               name="issue"
-               rows="5"
-               placeholder="Describe what happened and any error message you received."
-               required
-            ></textarea>
+              id="issue"
+              name="issue"
+              rows="6"
+              maxlength="3000"
+              placeholder="What were you trying to do? What happened instead? Include any error messages and steps you've already tried."
+              required>
+                {{ issue }}</textarea>
 
-            <button type="submit">Troubleshoot Issue</button>
-         </form>
-         {% if error %}
-            <p class="error-message" role="alert">{{ error }}</p>
-         {% endif %}
+            <p class="field-help">
+              Don't include passwords, API secrets, or other sensitive
+              credentials.
+            </p>
 
-         {% if issue %}
-            <h2>Your Submitted Issue</h2>
-            <p>{{ issue }}</p>
-         {% endif %}
+            <div class="wizard-actions">
+              <button type="button" class="secondary-button" data-back="2">
+                ← Back
+              </button>
+
+              <button type="submit" class="primary-button">
+                Submit issue →
+              </button>
+            </div>
+          </form>
+        </div>
       </section>
-   </main>
 
-   <script src="{{ url_for('static', filename='script.js') }}" defer></script> 
-   
- </body>
- </html>
+      {% endif %}
+
+      <footer>IT Troubleshooting Lab <span>•</span> Portfolio project</footer>
+    </main>
+  </body>
+</html>
