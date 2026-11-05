@@ -15,6 +15,8 @@ The goal is to build a troubleshooting application and expand it as I learn more
 ## Technologies
 
 - Python
+- HTML & CSS
+- JavaScript
 - Flask
 - Git and GitHub
 
