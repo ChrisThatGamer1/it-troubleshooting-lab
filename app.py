@@ -5,7 +5,15 @@ print("Starting app.py...") #temporary print
 
 app = Flask(__name__) #creates web app
 
-# Available categories and their supported issue types.
+# Defines the troubleshooting categories and the issue types
+# available within each category.
+#
+# The dictionary keys are internal values submitted by the 
+# browswer. The values are the user-friendly Labels displayed
+# in the interface.
+#
+# Keep these keys consistent with the category cards and 
+# the JavaScript workflow in index.html and script.js.
 ISSUE_TYPES = {
     "device": {
         "slow_computer": "Computer is running slowly",
@@ -44,7 +52,13 @@ CATEGORY_NAMES = {
     "email": "Email & collaboration",
 }
 
+"""
+Handle the main troubleshooting page. 
 
+Get: Display the troubleshooting workflow
+POST: Receive and validate the submitted issue. 
+
+"""
 @app.route("/", methods=["GET", "POST"])
 def home():
     error = ""

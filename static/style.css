@@ -1,8 +1,9 @@
-
+/* Apply consistent sizing to all elements */
 * {
     box-sizing: border-box;
 }
 
+/* Global page styling */
 :root {
     font-family: Arial, Helvetica, sans-serif;
     color: #172033;
@@ -25,13 +26,18 @@ button {
     cursor: pointer;
 }
 
+/* Main application container */
 .app-shell {
+    width: 100%;
     max-width: 960px;
+    min-width: 0;
     margin: 0 auto;
 }
 
+/* Header and branding */
 .app-header {
     display: flex;
+    flex-wrap: nowrap;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
@@ -49,6 +55,7 @@ button {
 .brand-icon {
     display: grid;
     place-items: center;
+    flex-shrink: 0;
     width: 44px;
     height: 44px;
     border-radius: 13px;
@@ -80,6 +87,13 @@ button {
     letter-spacing: 1px;
 }
 
+.header-label {
+    margin-left: auto;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+/* Three-step progress indicator */
 .progress {
     display: flex;
     align-items: center;
@@ -123,8 +137,11 @@ button {
     background: #d6dce6;
 }
 
+/* Wizard and confirmation containers */
 .wizard,
 .confirmation {
+    width: 100%;
+    min-width: 0;
     padding: 40px;
     border: 1px solid #e4e8ef;
     border-radius: 22px;
@@ -151,6 +168,7 @@ h1 {
     line-height: 1.7;
 }
 
+/* Category selection cards */
 .category-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -160,12 +178,12 @@ h1 {
 .category-card,
 .issue-type-card {
     width: 100%;
+    min-width: 0;
     text-align: left;
     border: 1px solid #e0e5ee;
     border-radius: 14px;
     background: white;
-    transition: border-color 0.15s, background 0.15s,
-        transform 0.15s;
+    transition: border-color 0.15s, background 0.15s, transform 0.15s;
 }
 
 .category-card {
@@ -217,6 +235,7 @@ h1 {
     line-height: 1.6;
 }
 
+/* Issue selection */
 .selected-category {
     margin-bottom: 18px;
     color: #65738a;
@@ -239,6 +258,7 @@ h1 {
     color: #3153d5;
 }
 
+/* Selected issue summary */
 .selected-summary,
 .summary {
     display: grid;
@@ -259,6 +279,7 @@ h1 {
     font-size: 14px;
 }
 
+/* Issue description form */
 form label {
     display: block;
     margin-bottom: 9px;
@@ -269,6 +290,8 @@ form label {
 textarea {
     display: block;
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     min-height: 150px;
     padding: 14px;
     border: 1px solid #cbd4e2;
@@ -284,6 +307,7 @@ textarea:focus {
     outline: 3px solid rgba(49, 83, 213, 0.13);
 }
 
+/* Navigation and submission buttons */
 .wizard-actions {
     display: flex;
     align-items: center;
@@ -329,6 +353,7 @@ textarea:focus {
     margin-top: 10px;
 }
 
+/* Form validation messages */
 .alert {
     margin-bottom: 18px;
     padding: 14px 16px;
@@ -339,6 +364,7 @@ textarea:focus {
     font-size: 14px;
 }
 
+/* Successful submission screen */
 .confirmation {
     text-align: center;
 }
@@ -370,6 +396,7 @@ textarea:focus {
     white-space: pre-wrap;
 }
 
+/* Footer */
 footer {
     padding: 25px 0;
     color: #8792a5;
@@ -381,26 +408,61 @@ footer span {
     padding: 0 5px;
 }
 
+/* Keyboard accessibility */
 button:focus-visible,
 a:focus-visible {
     outline: 3px solid #8da5ff;
     outline-offset: 3px;
 }
 
+/* ==================================
+   MOBILE RESPONSIVE DESIGN
+   ================================== */
+
 @media (max-width: 600px) {
+
     body {
         padding: 20px 12px;
     }
 
+    /* Keep branding and IT Support on one row */
     .app-header {
-        align-items: flex-start;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .brand {
+        flex: 1;
+        min-width: 0;
+        gap: 8px;
+    }
+
+    .brand strong {
+        font-size: 14px;
+    }
+
+    .brand small {
+        font-size: 11px;
+    }
+
+    .brand-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 22px;
     }
 
     .header-label {
-        padding-top: 12px;
-        font-size: 9px;
+        margin-left: auto;
+        padding-top: 0;
+        text-align: right;
+        white-space: nowrap;
+        font-size: 8px;
+        flex-shrink: 0;
     }
 
+    /* Compact progress indicator */
     .progress {
         gap: 6px;
     }
@@ -410,31 +472,115 @@ a:focus-visible {
         font-size: 10px;
     }
 
+    .progress-step > span {
+        width: 24px;
+        height: 24px;
+    }
+
     .progress-line {
         width: 12px;
     }
 
+    /* Adjust wizard containers */
     .wizard,
     .confirmation {
+        width: 100%;
+        min-width: 0;
         padding: 24px 18px;
         border-radius: 16px;
     }
 
+    .wizard-step {
+        width: 100%;
+        min-width: 0;
+    }
+
+    h1 {
+        font-size: 26px;
+    }
+
+    .intro {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 22px;
+    }
+
+    /* Display category cards in one column */
     .category-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: 100%;
+        min-width: 0;
         gap: 12px;
     }
 
+    /* Keep category cards within the mobile viewport */
     .category-card {
-        min-height: 125px;
-        padding: 18px;
+        width: 100%;
+        min-width: 0;
+        min-height: 110px;
+        padding: 14px 16px;
+        overflow-wrap: anywhere;
     }
 
+    /* Reduce spacing around category icons */
+    .card-icon {
+        margin-bottom: 10px;
+        font-size: 22px;
+    }
+
+    .category-card strong {
+        font-size: 14px;
+    }
+
+    .category-card > span:not(.card-icon):not(.card-arrow) {
+        font-size: 12px;
+        line-height: 1.4;
+        overflow-wrap: anywhere;
+    }
+
+    /* Issue selection buttons */
+    .issue-type-list {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .issue-type-card {
+        width: 100%;
+        min-width: 0;
+        padding: 15px;
+        overflow-wrap: anywhere;
+    }
+
+    /* Submission form */
+    textarea {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
+
+    /* Back and submit buttons */
     .wizard-actions {
-        align-items: stretch;
+        align-items: center;
+        gap: 10px;
     }
 
     .wizard-actions button {
         padding: 12px;
+        font-size: 13px;
+    }
+
+    /* Confirmation summary */
+    .summary {
+        width: 100%;
+        min-width: 0;
+        padding: 16px;
+        overflow-wrap: anywhere;
+    }
+
+    /* Footer */
+    footer {
+        padding: 20px 5px;
+        font-size: 11px;
     }
 }
