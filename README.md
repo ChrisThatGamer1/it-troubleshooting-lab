@@ -1,10 +1,20 @@
 # IT Troubleshooting Lab
 
-## About
+### A smarter way to manage IT support requests. 
 
-I'm building this project to practice Python, IT troubleshooting, and web development while learning how applications work from the ground up.
+A web-based IT service desk application designed to help employees submit technical issues and give IT technicians a centralized platform to manage, investigate, and resolve spport requests. 
 
-The goal is to build a troubleshooting application and expand it as I learn more about programming, backend development, and APIs.
+### Application Preview
+
+The employee-facing support portal features a guided issue submission workflow with a responsive interface designed for desktop and mobile devices.
+
+### Desktop Experience
+
+![IT Troubleshooting Lab - Desktop](screenshots/desktop-homepage.png)
+
+### Mobile Experience
+
+![IT Troubleshooting Lab - Mobile](screenshots/mobile-homepage.png)
 
 ## Current Features
 
