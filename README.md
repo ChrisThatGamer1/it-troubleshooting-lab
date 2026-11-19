@@ -24,8 +24,45 @@ Python · Flask · HTML · CSS · JavaScript · Git · GitHub
 
 ## Run Locally
 
+**Prerequisites:** Python 3 and Git.
+
 **1. Clone the repository**
 
 ```bash
 git clone https://github.com/ChrisThatGamer1/it-troubleshooting-lab.git
 cd it-troubleshooting-lab
+```
+
+**2. Create a virtual environment**
+
+```bash
+python -m venv .venv
+```
+
+**3. Activate the virtual environment**
+
+Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+macOS / Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+**4. Install dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+**5. Start the application**
+
+```bash
+python app.py
+```
+
+Open http://127.0.0.1:5000 in your browser.
